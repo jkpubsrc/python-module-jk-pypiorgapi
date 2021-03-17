@@ -1,0 +1,65 @@
+{
+	"magic": {
+		"magic": "packageinfo",
+		"version": 2,
+	},
+	"meta": {
+		"name": "jk_pypiorgapi",
+		"version": "0.2021.3.17",
+		"packageClass": "python-module",
+		"language": "python3",
+		"development_status": "beta",
+		"license": "Apache2",
+		"keywords": [
+			"pypi", "pypi.org",
+		],
+		"description": "An API for accessing Python packet information hosted on pypi.org",
+		"authors": [
+			{
+				"name": "Jürgen Knauth",
+				"email": "pubsrc@binary-overflow.de"
+			}
+		],
+	},
+	"requirements": {
+		"python_packages": [
+			"bs4",
+			"jk_furl",
+			"jk_prettyprintobj",
+		],
+		"python_packages_dev": [
+		],
+		"system_apt_packages": [
+		],
+	},
+	"source": {
+		"packages": [
+			"jk_pypiorgapi",
+		],
+		"extra_data_files": [
+		],
+		"extra_binary_files": [
+		]
+	},
+	"documentation": [
+		/*
+		"wiki": {
+			"page": "DevDocs:jk_pypiorgapi"
+		}
+		*/
+	],
+	"repositories": [
+		{
+			"type": "github",
+			"user": "jkpubsrc",
+			"project": "python-module-jk-pypiorgapi",
+			"devon_publish": false
+		},
+		{
+			"type": "pypi",
+			"project": "jk_pypiorgapi",
+			"devon_publish": false
+		}
+	],
+}
+
