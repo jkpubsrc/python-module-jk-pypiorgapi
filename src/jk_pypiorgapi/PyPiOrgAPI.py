@@ -6,14 +6,13 @@ import typing
 import urllib.parse
 
 from bs4 import BeautifulSoup
-import pypine
 
 
 
 
 
 from ._CachedValue import _CachedValue
-
+from .URLFile import URLFile
 
 
 
@@ -42,7 +41,7 @@ class PyPiOrgAPI(object):
 	################################################################################################################################
 
 	def __listAllPackagesCallback(self, log) -> list:
-		url = pypine.URLFile("https://pypi.org/simple/")
+		url = URLFile("https://pypi.org/simple/")
 
 		allPackages = []
 		for line in url.readText().split("\n"):
@@ -75,7 +74,7 @@ class PyPiOrgAPI(object):
 		return (packageName, packageVersion, packageDescription)
 	#
 
-	def __parsePackageSearchResultPage(self, baseURL:pypine.URLFile, xPage) -> tuple:
+	def __parsePackageSearchResultPage(self, baseURL:URLFile, xPage) -> tuple:
 		xDiv = xPage.find("div", { "class": "left-layout__main" })
 		xForm = xDiv.find("form", { "action": "/search/" })
 		#self.__saveBS4Tree(xForm, "xForm.html")
@@ -136,7 +135,7 @@ class PyPiOrgAPI(object):
 	#							because the specified package does not exist.
 	#
 	def getPackageInfoJSON(self, packageName:str, log = None) -> typing.Union[dict,None]:
-		url = pypine.URLFile("https://pypi.org/pypi/" + packageName +"/json")
+		url = URLFile("https://pypi.org/pypi/" + packageName +"/json")
 		return url.readJSON()
 	#
 
@@ -160,7 +159,7 @@ class PyPiOrgAPI(object):
 			if classifiers:
 				surl += "&" + "&".join([ urllib.parse.quote_plus(c) for c in classifiers ])
 			#log.notice("Retrieving: " + surl)
-			url = pypine.URLFile(surl)
+			url = URLFile(surl)
 
 			xPage = BeautifulSoup(url.readText(), "lxml")
 			#self.__saveBS4Tree(xPage, "out.html")

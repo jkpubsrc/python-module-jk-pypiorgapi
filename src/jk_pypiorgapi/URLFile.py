@@ -1,7 +1,7 @@
 #
 # NOTE: This is a copy of pypine.do.URLFile.
-#		This copy has been made to avoid un unnecessary dependency to 'pypine'.
-# 		Package 'pypine' will always host the most recent version of URLFile.
+#		This copy is necessary to avoid unnecessary dependencies to 'pypine'.
+# 		Package 'pypine' will always contain the most recent version of URLFile.
 #
 
 

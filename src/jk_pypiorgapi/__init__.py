@@ -1,10 +1,9 @@
 ﻿
 
 
-__version__ = "0.2021.3.17"
+__version__ = "0.2021.4.14"
 
 
 
 from .PyPiOrgAPI import PyPiOrgAPI
-
 

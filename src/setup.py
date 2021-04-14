@@ -39,7 +39,7 @@ setup(
 	packages = [
 		"jk_pypiorgapi",
 	],
-	version = "0.2021.3.17",
+	version = "0.2021.4.14",
 	zip_safe = False,
 	long_description = readme(),
 	long_description_content_type="text/markdown",

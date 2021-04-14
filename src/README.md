@@ -8,7 +8,7 @@ This python module provides an API for accessing Python packet information hoste
 
 Information about this module can be found here:
 
-* [github.org](https://github.com/jkpubsrc/....)
+* [github.org](https://github.com/jkpubsrc/python-module-jk-pypiorgapi)
 * [pypi.python.org](https://pypi.python.org/pypi/jk_pypiorgapi)
 
 Why this module?
@@ -68,6 +68,15 @@ NOTE: For experimenting you might want to display this data in an easy way. [`jk
 import jk_json
 jk_json.prettyPrint(jData)
 ```
+
+Dependencies
+-------------------
+
+This module has the following dependencies:
+
+* bs4
+* jk_furl
+* jk_prettyprintobj
 
 Author(s)
 -------------------
