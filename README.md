@@ -77,6 +77,8 @@ As the method `iteratePackagesByClassifier()` returns an iterator you need to lo
 | str			| pkgVersion		| The version of the package.		|
 | str			| pkgDescription	| The description of the package.	|
 
+For a list of classifiers see: [`https://pypi.org/classifiers/`](https://pypi.org/classifiers/)
+
 ### Get information about an existing packages
 
 If you want to retrieve information about a certain package hosted on `pypi.org`, you can use this method:
