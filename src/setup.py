@@ -36,11 +36,17 @@ setup(
 	],
 	license = "Apache2",
 	name = "jk_pypiorgapi",
+	package_data = {
+		"": [
+		],
+	},
 	packages = [
 		"jk_pypiorgapi",
 	],
-	version = "0.2021.4.14",
+	scripts = [
+	],
+	version = '0.2022.6.13',
 	zip_safe = False,
 	long_description = readme(),
-	long_description_content_type="text/markdown",
+	long_description_content_type = "text/markdown",
 )

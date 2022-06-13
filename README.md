@@ -51,7 +51,33 @@ packageNames = api.listAllPackages()
 Please be aware that invoking this method **is expensive**. The reason why calling is method is expensive is that the package index nowadays has over 16 MBytes in size.
 Please use this method wisely to avoid server load on `pypi.org` and do not download the package index too frequently!
 
-### List existing packages
+### Search for packages
+
+Here is an example how to search for specific packages:
+
+```python
+for jData in api.iteratePackagesByClassifier(
+		searchTerm="jk_pypiorgapi",
+		classifiers=[
+			"Development Status :: 5 - Production/Stable",
+			"Development Status :: 6 - Mature",
+		]
+	):
+
+	print(jData)		# do something with the search result here
+```
+
+As the method `iteratePackagesByClassifier()` returns an iterator you need to loop through the results. The objects returned by `iteratePackagesByClassifier()` is an instance of `PyPiPackage` which provides the following properties:
+
+| Data Type		| Name				| Description		|
+| ---			| ---				| ---				|
+| int			| nResultNo			| The result index number. This is a counter starting at zero, enumerating all results.	|
+| int			| nMaxResults		| The number of results to be expected. (Don't rely on it, neither can all be iterated if this value is too large, nor does it need to remain unchanged during the iteration.)	|
+| str			| pkgName			| The name of the package.			|
+| str			| pkgVersion		| The version of the package.		|
+| str			| pkgDescription	| The description of the package.	|
+
+### Get information about an existing packages
 
 If you want to retrieve information about a certain package hosted on `pypi.org`, you can use this method:
 
@@ -62,10 +88,11 @@ jData = api.getPackageInfoJSON("jk_pypiorgapi")
 This will look up the package `jk_pypiorgapi` and retrieve all information about it as a JSON data structure. This method directly provides the information `pypi.org` provides
 via its API.
 
-NOTE: For experimenting you might want to display this data in an easy way. [`jk_json`](https://pypi.org/project/jk-json/) provides a convenience method named `prettyPrint()` for that purpose:
+NOTE: For experimenting purposes you might want to display this data in an easy way. [`jk_json`](https://pypi.org/project/jk-json/) provides a convenience method named `prettyPrint()` for that purpose:
 
 ```python
 import jk_json
+
 jk_json.prettyPrint(jData)
 ```
 

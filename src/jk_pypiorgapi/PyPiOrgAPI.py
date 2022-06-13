@@ -14,6 +14,11 @@ from bs4 import BeautifulSoup
 from ._CachedValue import _CachedValue
 from .URLFile import URLFile
 
+from .PyPiPackage import PyPiPackage
+
+
+
+
 
 
 
@@ -122,7 +127,7 @@ class PyPiOrgAPI(object):
 	#							This method should always return a list. This method will only return <c>None</c>
 	#							if data from the server could not be retrieved.
 	#
-	def listAllPackages(self, log = None) -> typing.Union[list,None]:
+	def listAllPackages(self, log = None) -> typing.List[str]:
 		return self.__listAllPackages(log)
 	#
 
@@ -140,16 +145,20 @@ class PyPiOrgAPI(object):
 	#
 
 	#
-	# Returns an iterator with all search results.
+	# Returns an iterator that provides all search results.
 	#
-	# @return		int nResultNo			The result index number. This is a counter starting at zero, enumerating all results.
-	# @return		int nMaxResults			The number of results to be expected. (Don't rely on it, neither can all be iterated if this value is too large,
-	#										nor does it need to remain unchanged during the iteration.)
-	# @return		str pkgName				The name of the package.
-	# @return		str pkgVersion			The version of the package.
-	# @return		str pkgDescription		The description of the package.
+	# @param		str searchTerm			(Required) The term to search for.
+	# @param		str[] classifiers		(Optional, but recommended) The classifier to use for filtering. (See: https://pypi.org/classifiers/)
+	# @return		PyPiPackage[]			Returns PyPiPackage objects.
 	#
-	def iteratePackagesByClassifier(self, searchTerm:str, classifiers:list, log = None) -> typing.Union[list,None]:
+	def iteratePackagesByClassifier(self, searchTerm:str, classifiers:list = None, log = None) -> typing.Iterable[PyPiPackage]:
+		assert isinstance(searchTerm, str)
+		assert searchTerm
+		if classifiers is not None:
+			assert isinstance(classifiers, (tuple,list))
+
+		# ----
+
 		nPage = 1
 		nMaxPage = -1
 
@@ -157,16 +166,16 @@ class PyPiOrgAPI(object):
 		while True:
 			surl = "https://pypi.org/search/?q=" + urllib.parse.quote_plus(searchTerm) + "&page=" + str(nPage)
 			if classifiers:
-				surl += "&" + "&".join([ urllib.parse.quote_plus(c) for c in classifiers ])
+				surl += "&" + "&".join([ ("c=" + urllib.parse.quote_plus(c)) for c in classifiers ])
 			#log.notice("Retrieving: " + surl)
 			url = URLFile(surl)
 
 			xPage = BeautifulSoup(url.readText(), "lxml")
 			#self.__saveBS4Tree(xPage, "out.html")
 
-			nCountResults, nMaxPage, packageList = self.__parsePackageSearchResultPage(url, xPage)
-			for n, v, d in packageList:
-				yield nResultNo, nCountResults, n, v, d
+			nMaxResults, nMaxPage, packageList = self.__parsePackageSearchResultPage(url, xPage)
+			for pkgName, pkgVersion, pkgDescription in packageList:
+				yield PyPiPackage(nResultNo, nMaxResults, pkgName, pkgVersion, pkgDescription)
 				nResultNo += 1
 
 			if (nMaxPage < 0) or (nPage >= nMaxPage):

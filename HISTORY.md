@@ -5,3 +5,7 @@
 	* Dependeny to pypine removed
 	* README.md updated
 
+* 2022-06-13
+	* Improved API, especially the type hints
+	* Added documentation
+

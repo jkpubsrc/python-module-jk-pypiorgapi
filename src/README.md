@@ -74,9 +74,9 @@ Dependencies
 
 This module has the following dependencies:
 
-* bs4
-* jk_furl
-* jk_prettyprintobj
+* [bs4](https://pypi.org/project/beautifulsoup4/) for HTML parsing
+* [jk_furl](https://github.com/jkpubsrc/python-module-jk-furl) for more convenient URL handling
+* [jk_prettyprintobj](https://github.com/jkpubsrc/python-module-jk-prettyprintobj) for pretty printing objects for debugging
 
 Author(s)
 -------------------
