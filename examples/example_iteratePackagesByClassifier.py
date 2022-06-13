@@ -10,7 +10,10 @@ import jk_pypiorgapi
 api = jk_pypiorgapi.PyPiOrgAPI()
 for jData in api.iteratePackagesByClassifier(
 		searchTerm="jk_pypiorgapi",
-		classifiers=[ "Development Status :: 5 - Production/Stable" ]
+		classifiers=[
+			"Development Status :: 5 - Production/Stable",
+			"Development Status :: 6 - Mature",
+		]
 	):
 
 	print(jData)
